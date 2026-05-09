@@ -27,8 +27,6 @@ uint64_t Query[N];
 uint32_t *HashTables[PAIRS];
 uint64_t *db_raw[PAIRS];
 
-uint64_t frequencies[20] = {0};
-
 typedef struct
 {
     int ub;
@@ -377,8 +375,6 @@ void fetch_candidate_ranges(const uint16_t *keys, range *ranges_out)
 
 bool scan_candidates(const range *ranges, const PatternTable *pt)
 {
-    for (int i = 0; i < PAIRS; i++)
-        frequencies[(ranges[i].ub - ranges[i].lb) / 10]++;
     uint64_t batches[BATCH_SIZE];
     int batch_count = 0;
 
@@ -460,7 +456,5 @@ int main(int argc, char const *argv[])
     decode_db_ids(sizes, &ptr, &memory_ptr);
     process_queries();
 
-    for (int i = 0; i < 20; i++)
-        fprintf(stderr, "%d-%d=%lu\n", i * 10, (i + 1) * 10, frequencies[i]);
     return 0;
 }
