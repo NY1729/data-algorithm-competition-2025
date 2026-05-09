@@ -78,8 +78,8 @@ Accuracy:            100.000000 %
 
 ```bash
 # Build
-gcc -o search search.c
-gcc -o prep prep.c
+gcc -o search -O2 search.c
+gcc -o prep -O2 prep.c
 
 # Step 1: Build index from database file
 ./prep database.txt > index_db
